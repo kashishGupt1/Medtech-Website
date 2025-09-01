@@ -24,7 +24,7 @@
                     <a href="{{ url('/admin/add-product') }}" class="btn btn-primary mb-3 mb-lg-0">Add New Product</a>
                 </div>
                 <div class="card-body">
-                    <table id="myTable" class="table" style="width:100%">
+                    <table id="example" class="table" style="width:100%">
                         <thead class="table-light">
                             <tr>
                                 <th class="text-center">Sr. No.</th>
