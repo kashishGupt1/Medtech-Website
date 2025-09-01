@@ -29,6 +29,7 @@ public function show(Request $request, ?string $slug = null)
     
     $products = Product::where('category_id', $currentCategory->id)
         ->where('status', 'Active')
+        ->orderBy('sort_order', 'asc')
         ->get();
 
     

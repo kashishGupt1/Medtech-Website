@@ -55,14 +55,14 @@
                                     <textarea class="ckeditor form-control" name="breadcrumb_description" placeholder="Enter breadcrumbs description"></textarea>
                                     <span class="text-danger error-text breadcrumb_description_error"></span>
                                 </div>
-                                {{-- <div class="form-group col-md-4">
+                                <div class="form-group col-md-4">
                                     <label>Breadcrumbs Image </label>
                                     <input type="file" class="form-control" name="breadcrumb_image"
                                         accept="application/image/png,image/jpeg,image/jpg,image/webp">
                                     <img id="breadcrumbImagePreview" src="#" alt="Image Preview"
                                         class="img-fluid mt-2 d-none" width="150" height="150">
                                     <span class="text-danger error-text breadcrumb_image_error"></span>
-                                </div> --}}
+                                </div>
                             </div>
 
                             <h5 class="card-title mt-3">Meta Information</h5>

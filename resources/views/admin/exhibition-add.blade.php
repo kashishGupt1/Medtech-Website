@@ -46,10 +46,17 @@
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label>Exhibition Date <span class="text-danger">*</span></label>
-                                <input type="date" class="form-control" name="exhibition_date" id="exhibition_date"
-                                    value="{{ old('exhibition_date', isset($exhibition) && $exhibition->exhibition_date ? \Carbon\Carbon::parse($exhibition->exhibition_date)->format('Y-m-d') : '') }}">
-                                <span class="text-danger error-text exhibition_date_error"></span>
+                                <label>Exhibition Start Date <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control" name="exhibition_start_date" id="exhibition_start_date"
+                                    value="{{ old('exhibition_start_date', isset($exhibition) && $exhibition->exhibition_start_date ? \Carbon\Carbon::parse($exhibition->exhibition_start_date)->format('Y-m-d') : '') }}">
+                                <span class="text-danger error-text exhibition_start_date_error"></span>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>Exhibition End Date <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control" name="exhibition_end_date" id="exhibition_end_date"
+                                    value="{{ old('exhibition_end_date', isset($exhibition) && $exhibition->exhibition_end_date ? \Carbon\Carbon::parse($exhibition->exhibition_end_date)->format('Y-m-d') : '') }}">
+                                <span class="text-danger error-text exhibition_end_date_error"></span>
                             </div>
 
                             <div class="form-group col-md-4">

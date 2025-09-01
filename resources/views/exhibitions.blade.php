@@ -57,7 +57,9 @@
                                                              <ul class="mb-2 p-0">
                                                                  <li class="display-30">
                                                                      <i
-                                                                         class="fa fa-calendar text-primary pe-2"></i>{{ \Carbon\Carbon::parse($item->exhibition_date)->format('d-m-Y') }}
+                                                                         class="fa fa-calendar text-primary pe-2"></i>{{ \Carbon\Carbon::parse($item->exhibition_start_date)->format('d-m-Y') }}
+                                                                     -
+                                                                     {{ \Carbon\Carbon::parse($item->exhibition_end_date)->format('d-m-Y') }}
                                                                  </li>
                                                                  <li class="display-30">
                                                                      <i
@@ -65,17 +67,12 @@
                                                                  </li>
                                                              </ul>
                                                              <div class="medtech-editor mb-2">{!! Str::limit($item->exhibition_description, 85) !!}</div>
-                                                             {{-- <a href="javascript:void(0)"
+                                                             <a href="javascript:void(0)"
                                                                  class="butn-style3 white sm openAppointmentModal"
                                                                  data-bs-toggle="modal" data-bs-target="#bookanappointment"
                                                                  data-exhibition="{{ $item->exhibition_name }}">
                                                                  <span>Book an Appointment</span>
-                                                             </a> --}}
-                                                             <a href="{{ route('exhibitions.details', ['slug' => $item->slug]) }}"
-                                                                 class="butn-style3 white sm">
-                                                                 <span>Learn More</span>
                                                              </a>
-
                                                          </div>
                                                      </article>
                                                  </div>
@@ -109,7 +106,9 @@
                                                              <ul class="mb-2 p-0">
                                                                  <li class="display-30">
                                                                      <i
-                                                                         class="fa fa-calendar text-primary pe-2"></i>{{ \Carbon\Carbon::parse($item->exhibition_date)->format('d-m-Y') }}
+                                                                         class="fa fa-calendar text-primary pe-2"></i>{{ \Carbon\Carbon::parse($item->exhibition_start_date)->format('d-m-Y') }}
+                                                                     -
+                                                                     {{ \Carbon\Carbon::parse($item->exhibition_end_date)->format('d-m-Y') }}
                                                                  </li>
                                                                  <li class="display-30">
                                                                      <i
@@ -117,15 +116,11 @@
                                                                  </li>
                                                              </ul>
                                                              <div class="medtech-editor mb-2">{!! Str::limit($item->exhibition_description, 85) !!}</div>
-                                                             {{-- <a href="javascript:void(0)"
+                                                             <a href="javascript:void(0)"
                                                                  class="butn-style3 white sm openAppointmentModal"
                                                                  data-bs-toggle="modal" data-bs-target="#bookanappointment"
                                                                  data-exhibition="{{ $item->exhibition_name }}">
                                                                  <span>Book an Appointment</span>
-                                                             </a> --}}
-                                                             <a href="{{ route('exhibitions.details', ['slug' => $item->slug]) }}"
-                                                                 class="butn-style3 white sm">
-                                                                 <span>Learn More</span>
                                                              </a>
 
                                                          </div>
@@ -160,7 +155,9 @@
                                                              <ul class="mb-2 p-0">
                                                                  <li class="display-30">
                                                                      <i
-                                                                         class="fa fa-calendar text-primary pe-2"></i>{{ \Carbon\Carbon::parse($item->exhibition_date)->format('d-m-Y') }}
+                                                                         class="fa fa-calendar text-primary pe-2"></i>{{ \Carbon\Carbon::parse($item->exhibition_start_date)->format('d-m-Y') }}
+                                                                     -
+                                                                     {{ \Carbon\Carbon::parse($item->exhibition_end_date)->format('d-m-Y') }}
                                                                  </li>
                                                                  <li class="display-30">
                                                                      <i
@@ -168,16 +165,9 @@
                                                                  </li>
                                                              </ul>
                                                              <div class="medtech-editor mb-2">{!! Str::limit($item->exhibition_description, 85) !!}</div>
-                                                             {{-- <a href="javascript:void(0)"
-                                                                 class="butn-style3 white sm openAppointmentModal"
-                                                                 data-bs-toggle="modal"
-                                                                 data-bs-target="#bookanappointment"
-                                                                 data-exhibition="{{ $item->exhibition_name }}">
-                                                                 <span>Book an Appointment</span>
-                                                             </a> --}}
                                                              <a href="{{ route('exhibitions.details', ['slug' => $item->slug]) }}"
                                                                  class="butn-style3 white sm">
-                                                                 <span>Learn More</span>
+                                                                 <span>View Gallery</span>
                                                              </a>
 
                                                          </div>
@@ -219,7 +209,7 @@
                              @php
 
                                  $roles = [
-                                     'Manufacture',
+                                     'Manufacturer',
                                      'Importer',
                                      'Consultant',
                                      'Wholesaler/ Distributor',
@@ -260,9 +250,9 @@
                              </div>
 
                              <!-- Product -->
-                             <div class="col-md-12">
+                             <div class="col-md-6">
                                  <div class="form-group">
-                                     <label>You Are <span class="text-danger">*</span></label>
+                                     <label>Select Product <span class="text-danger">*</span></label>
                                      <select class="form-select" name="role">
                                          <option value="">Select your product</option>
                                          @foreach ($roles as $role)

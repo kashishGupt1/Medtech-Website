@@ -29,7 +29,8 @@ class ExhibitionController extends Controller
             $validator = Validator::make($request->all(), [
                 'slug' => 'required|string|max:255|alpha_dash|unique:exhibitions,slug',
                 'exhibition_name' => 'required|string',
-                'exhibition_date' => 'required|date',
+                'exhibition_start_date' => 'required|date',
+                'exhibition_end_date' => 'required|date|after_or_equal:exhibition_start_date',
                 'exhibition_location' => 'required|string',
                 'exhibition_description' => 'nullable|string',
                 'exhibition_photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
@@ -74,7 +75,8 @@ class ExhibitionController extends Controller
             Exhibition::create([
                 'slug' => $slug,
                 'exhibition_name' => $request->exhibition_name,
-                'exhibition_date' => $request->exhibition_date,
+                'exhibition_start_date' => $request->exhibition_start_date,
+                'exhibition_end_date' => $request->exhibition_end_date,
                 'exhibition_location' => $request->exhibition_location,
                 'exhibition_description' => $request->exhibition_description,
                 'exhibition_photo' => $exhibitionPhotoPath,
@@ -117,7 +119,8 @@ class ExhibitionController extends Controller
         $request->validate([
             'slug' => 'required|string|max:255|alpha_dash|unique:exhibitions,slug,' . $exhibition->id,
             'exhibition_name' => 'required|string',
-            'exhibition_date' => 'required|date',
+            'exhibition_start_date' => 'required|date',
+            'exhibition_end_date' => 'required|date|after_or_equal:exhibition_start_date',
             'exhibition_location' => 'required|string',
             'exhibition_description' => 'nullable|string',
             'exhibition_photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
@@ -211,9 +214,18 @@ class ExhibitionController extends Controller
     {
         $today = \Carbon\Carbon::today();
 
-        $upcoming = Exhibition::where('status', 'Active')->whereDate('exhibition_date', '>', $today)->get();
-        $present = Exhibition::where('status', 'Active')->whereDate('exhibition_date', '=', $today)->get();
-        $past = Exhibition::where('status', 'Active')->whereDate('exhibition_date', '<', $today)->get();
+        $upcoming = Exhibition::where('status', 'Active')
+            ->whereDate('exhibition_start_date', '>', $today)
+            ->get();
+
+        $present = Exhibition::where('status', 'Active')
+            ->whereDate('exhibition_start_date', '<=', $today)
+            ->whereDate('exhibition_end_date', '>=', $today)
+            ->get();
+
+        $past = Exhibition::where('status', 'Active')
+            ->whereDate('exhibition_end_date', '<', $today)
+            ->get();
 
         $metaTags = MetaTag::where('page', 'Exhibition')->first();
 
@@ -224,8 +236,19 @@ class ExhibitionController extends Controller
         $breadcrumbDescription = $metaTags->breadcrumb_description ?? '';
         $breadcrumbImage = $metaTags->breadcrumb_image ?? '';
 
-        return view('exhibitions', compact('upcoming', 'present', 'past', 'meta_title', 'meta_description', 'meta_keywords', 'breadcrumbName', 'breadcrumbDescription', 'breadcrumbImage'));
+        return view('exhibitions', compact(
+            'upcoming',
+            'present',
+            'past',
+            'meta_title',
+            'meta_description',
+            'meta_keywords',
+            'breadcrumbName',
+            'breadcrumbDescription',
+            'breadcrumbImage'
+        ));
     }
+
 
     public function exhibitionDetails(string $slug)
     {

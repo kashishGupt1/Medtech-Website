@@ -19,6 +19,51 @@
 <script src={{asset('admin/plugins/select2/js/select2-custom.js')}}></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+    <!-- Example: jQuery UI Sortable for drag and drop -->
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var table = $('#myTable').DataTable({
+            rowId: 'tr',
+            ordering: false 
+        });
+
+        $('#sortable').sortable({
+            helper: function (e, ui) {
+                ui.children().each(function () {
+                    $(this).width($(this).width());
+                });
+                return ui;
+            },
+            update: function (event, ui) {
+                // Get IDs in new order
+                var orderedIds = [];
+                $('#sortable tr').each(function () {
+                    orderedIds.push($(this).data('id'));
+                });
+
+                // AJAX to update order
+                $.ajax({
+                    url: "{{ route('admin.products.updateOrder') }}",
+                    type: "POST",
+                    data: {
+                        ordered_ids: orderedIds,
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function (response) {
+                        toastr.success("Order updated successfully!");
+                    },
+                    error: function () {
+                        toastr.error("Failed to update order.");
+                    }
+                });
+            }
+        }).disableSelection();
+    });
+</script>
+
 
 <script>
 	$(document).ready(function () {

@@ -142,6 +142,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/admin/product/{id}', [ProductController::class, 'update'])->name('admin.product.update');
     Route::post('/admin/product/toggle-checkbox', [ProductController::class, 'toggleCheckbox'])
         ->name('admin.product.toggleCheckbox');
+Route::post('/admin/products/update-order', [ProductController::class, 'updateOrder'])->name('admin.products.updateOrder');
         
     Route::get('/admin/book-appointments', [RequestQuoteController::class, 'getExhibitionAppointments'])->name('admin.exhibition.appointment');
     Route::get('/admin/request-quote', [RequestQuoteController::class, 'create'])->name('admin.request.quote');

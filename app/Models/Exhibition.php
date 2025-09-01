@@ -12,7 +12,8 @@ class Exhibition extends Model
     protected $fillable = [
         'slug',
         'exhibition_name',
-        'exhibition_date',
+        'exhibition_start_date',
+        'exhibition_end_date',
         'exhibition_location',
         'exhibition_description',
         'exhibition_photo',

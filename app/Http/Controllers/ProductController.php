@@ -13,6 +13,28 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+public function updateOrder(Request $request)
+{
+    try {
+        $orderedIds = $request->input('ordered_ids');
+
+        if (!is_array($orderedIds)) {
+            return response()->json(['message' => 'Invalid data format'], 400);
+        }
+
+        foreach ($orderedIds as $index => $id) {
+            Product::where('id', $id)->update([
+                'sort_order' => $index + 1
+            ]);
+        }
+
+        return response()->json(['message' => 'Order updated successfully.']);
+    } catch (\Exception $e) {
+        return response()->json([
+            'message' => 'Error: ' . $e->getMessage()
+        ], 500);
+    }
+}
     public function create()
     {
         $categories = ProductCategory::where('status', 'Active')->get();
@@ -24,7 +46,9 @@ class ProductController extends Controller
     public function index()
     {
         try {
-            $products = Product::with('category')->latest()->get();
+            $products = Product::with('category')
+            ->orderBy('id', 'asc')
+            ->get();
 
             return view('admin.product-list', compact('products'));
 

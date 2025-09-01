@@ -29,7 +29,7 @@
                             <tr>
                                 <th class="text-center">Sr. No.</th>
                                 <th>Exhibition Name</th>
-                                <th class="text-center">Exhibition Date</th>
+                                <th class="text-center">Exhibition Start Date</th>
                                 <th class="text-center">Exhibition Location</th>
                                 <!--<th class="text-center">Exhibition Description</th>-->
                                 {{-- <th class="text-center">Meta Keyword</th>
@@ -60,7 +60,7 @@
                                             </div>
                                         </a>
                                     </td>
-                                    <td class="text-center">{{ \Carbon\Carbon::parse($exhibition->exhibition_date)->format('d-m-Y') }}</td>
+                                    <td class="text-center">{{ \Carbon\Carbon::parse($exhibition->exhibition_start_date)->format('d-m-Y') }}</td>
                                     <td class="text-center">{{ $exhibition->exhibition_location }}</td>
                                     <!--<td class="text-center">{{ $exhibition->exhibition_description }}</td>-->
                                     <td class="text-center">

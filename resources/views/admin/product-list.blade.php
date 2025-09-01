@@ -24,7 +24,7 @@
                     <a href="{{ url('/admin/add-product') }}" class="btn btn-primary mb-3 mb-lg-0">Add New Product</a>
                 </div>
                 <div class="card-body">
-                    <table id="example" class="table" style="width:100%">
+                    <table id="myTable" class="table" style="width:100%">
                         <thead class="table-light">
                             <tr>
                                 <th class="text-center">Sr. No.</th>
@@ -37,9 +37,9 @@
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @forelse ($products as $index => $product)
-                                <tr>
+                        <tbody id="sortable">
+                            @forelse ($products->sortBy('sort_order') as $index => $product)
+                                <tr data-id="{{ $product->id }}">
                                     <td class="text-center">{{ $index + 1 }}</td>
                                     {{-- <td class="text-center">
                                         <input type="checkbox" class="form-check-input toggle-menu"
@@ -156,5 +156,6 @@
         });
     });
 </script>
+
 
 @endsection
